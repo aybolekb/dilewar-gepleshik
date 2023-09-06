@@ -10,34 +10,38 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(AppStrings.appName),
-          actions: const [Icon(Icons.more_vert_rounded)],
-          backgroundColor: AppColors.primary,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Expanded(
-                  child: GridView.builder(
-                itemCount: itemList.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 25.0,
-                  childAspectRatio: 1.5,
-                  crossAxisSpacing: 18.0,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  final item = itemList[index];
-                  return CardView(
-                    title: item['title'],
-                    icon: item['icon'],
-                  );
-                },
-              )),
-            ],
-          ),
-        ));
+      appBar: AppBar(
+        title: const Text(AppStrings.appName),
+        actions: [
+          IconButton(
+              onPressed: () {}, icon: const Icon(Icons.language_rounded)),
+        ],
+        backgroundColor: AppColors.primary,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+              child: GridView.builder(
+            itemCount: itemList.length,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 16,
+              childAspectRatio: 1.5,
+              crossAxisSpacing: 12,
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              final item = itemList[index];
+              return CategoryCard(
+                title: item['title'],
+                icon: item['icon'],
+                onTap: () {},
+                color: AppColors.categoryColors[index] ?? Colors.black,
+              );
+            },
+          )),
+        ],
+      ),
+    );
   }
 }
